@@ -14,4 +14,12 @@ export default {
 	cart: (state) => {
 		return state.cart
 	},
+	getCartItem: (state) => (product) => {
+		for (let i = 0; i < state.cart.items.length; i++) {
+			if (state.cart.items[i].product.id === product.id) {
+				return state.cart.items[i];
+			}
+		}
+		return null;
+	}	
 }

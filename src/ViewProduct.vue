@@ -57,6 +57,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import { ADD_PRODUCT_TO_CART} from './mutations.js'
 
     export default {
         props: {
@@ -93,7 +94,7 @@ import {mapGetters} from 'vuex';
             next();
         },
         methods: {
-			addProductToCart() {
+			[ADD_PRODUCT_TO_CART]() {
 				console.log(this.getCartItem(this.product));
 				let cartItem = this.getCartItem(this.product);
 				if (cartItem != null) {

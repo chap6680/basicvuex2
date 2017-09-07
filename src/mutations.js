@@ -1,23 +1,54 @@
 export default {
 
-	addProductToCartM(state, payload) {
-		/* let cartItem = state.payload.products;
-		console.log(cartItem); 
-		const findProduct = state.product.find(productID => {
-			product.id = productID
-		});
-		findProduct.registered = true;
-		*/
-		const updatecart = {
+//	[ADD_PRODUCT_TO_CART](state, payload)
+	addProductMutation(product, quantity) {
+		let cartItem = null;
+		for (var i = 0; i < state.cart.items.length; i++) {
+			if (state.cart.items[i].product.id === payload.product.id) {
+				cartItem = state.cart.items[i];
+			}
+		 }
+	//			cartItem = state.getCartItem(payload.product);
+
+		
+		
+		if (payload.cartItem != null) {
+			payload.cartItem.quantity += payload.quantity;
+		} else { 
+			state.cart.items.push({
+				product: payload.product,
+				quantity: payload.quantity
+			});
+		}
+		payload.product.inStock -= payload.quantity;
+
+
+		/* 		const updatecart = {
 			product: payload.product,
 			quantity: payload.quantity
 		};
 		state.cart.items.push(updatecart);
-		payload.product.inStock-= payload.quantity;
+		payload.product.inStock-= payload.quantity; */
 	},
-	checkout () { 
-		if (confirm('Are you sure you want to purchase these products?')) { 
-			this.$store.commit('checkout')
-		}
+/* 	[ADD_PRODUCT_TO_CART2] (state, payload) {
+		state.cart.items.push({
+			product: payload.product,
+			quantity: payload.quantity
+		});
+		payload.product.inStock -= payload.quantity;
+	 },
+ */
+	[CHECKOUT] (state) { 
+		state.cart.items.forEach(function(item) {
+			item.product.inStock += item.quantity;
+		}),
+			state.cart.items = [];
 	}
+/* 	increaseQuantityM (state) {
+		state.cart.items.quantity++;
+	 }*/
+/* 	[INCREASE_PRODUCT_QUANTITY] (state, payload) { 
+		payload.cartItem += payload.quantity;
+		payoad.product.inStock -= payload.quantity;	
+	} */
 }

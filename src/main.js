@@ -5,7 +5,8 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import { routes } from './routes';
 import { store } from './store';
-import { actions } from './actions'
+import { actions } from './actions';
+import { ADD_PRODUCT_TO_CART, CHECKOUT } from './mutationtypes';
 
 Vue.filter('currency', function (value) {
 	let formatter = new Intl.NumberFormat('en-US', {

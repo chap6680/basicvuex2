@@ -23,7 +23,7 @@
                 <td>
                     {{ item.quantity }} &nbsp;
                     <button class="btn btn-success" @click="increaseQuantity(item)" :disabled="item.product.inStock == 0">+</button>
-                    <button class="btn btn-danger" @click="decreaseQuantity(item)">-</button>
+                    <button class="btn btn-danger" @click="decreaseQuantityM(item)">-</button>
                 </td>
                 <td class="text-right">{{ item.quantity * item.product.price | currency }}</td>
 				<td></td>
@@ -57,8 +57,8 @@
             <tr>
                 <td colspan="2"></td>
                 <td>
-					<!-- <button class="btn btn-success" @click="checkout">Checkout</button>
-					 --></td>
+					<button class="btn btn-success" @click="checkout">Checkout</button>
+				</td>
             </tr>
             </tbody>
         </table>
@@ -85,17 +85,25 @@ import {mapMutations} from 'vuex';
 	   },
 	   methods: {
 		   ...mapMutations({
-			   'checkout'
-		   })
+			   checkout: 'checkout',
+			   increaseQuantityM: 'increaseQuantity'
+		   }),
         // TODO: Implement increaseQuantity method
-		increaseQuantity: function (item){
-			console.log(item);
-			return this.cartTotal.inStock++;
-		}
-
+			increaseQuantity: function (item){
+				console.log("button pushed " + item);
+				console.log("state" + this.$store.state.cart);
+				this.$store.commit('[INCREASE_PRODUCT_QUANTITY]')
+			},
+			// return this.cartTotal.inStock++;
+		
         // TODO: Implement decreaseQuantity method
 
-        // TODO: Implement checkout method
+		// TODO: Implement checkout method
+			checkout(){
+				if(confirm("are you sure?")){
+					this.$store.commit('checkout');
+				}
+			}
 	   },
 
         beforeRouteLeave(to, from, next) {

@@ -41,6 +41,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
+//import { ADD_PRODUCT_TO_CART} from './mutations.js'
  
     export default {
         data () {
@@ -85,15 +86,7 @@ import {mapGetters} from 'vuex';
 				}	
 			product.inStock -= quantity;
 			this.cartTotal += product.price * quantity;
-			}, */
-			addProductMutation(product, quantity) {
-				console.log("product: " + product.name);
-				this.$store.commit('addProductToCartM', {
-					product: product,
-					quantity: quantity
-				});
-			},
-	        getCartItem: function(product) {
+			getCartItem: function(product) {
 				for (var i = 0; i < this.cart.items.length; i++) {
 					if (this.cart.items[i].product.id === product.id) {
 						return this.cart.items[i];
@@ -101,6 +94,17 @@ import {mapGetters} from 'vuex';
             	}
             return null;
         	}
+			}, */
+			//	[ADD_PRODUCT_TO_CART](product, quantity)
+			
+			addProductMutation(product, quantity) {
+				console.log("product: " + product.name);
+				this.$store.commit('addProductToCartM', {
+					product: product,
+					quantity: quantity
+				});
+			},
+	        
 		}
     }
 </script>
